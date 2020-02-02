@@ -30,14 +30,19 @@ module.exports = {
         aggregateTimeout: 500,  //防抖 多少毫秒后再次触发
         ignored: /node_modules/ //忽略时时监听
     },
-    recordsPath: path.join(__dirname, '../dist/records.json'),
-
+    recordsPath: path.join(__dirname, '../dist/records.json'), // json信息
     devServer: {
+        host:'0.0.0.0',
+        port: "8080",
         contentBase: "dist",
         hot: true,
-        overlay: true,
+        overlay: {
+            errors:true
+        },
+        clientLogLevel: "none",
         compress: true, // 一切服务采用gzip压缩
         quiet: true, // 禁止显示devServer的console信息
+        // progress: true, // 显示构建信息
         stats: {
             chunks: false, // 不添加chunk信息
             colors: true,
@@ -45,13 +50,7 @@ module.exports = {
         }
     },
     devtool: "source-map", // 本地调试工具
-    // 监听
-    watch: true,
-    watchOptions: {
-        poll: 1000, // 每秒询问多少次
-        aggregateTimeout: 500,  //防抖 多少毫秒后再次触发
-        ignored: /node_modules/ //忽略时时监听
-    },
+
     module: {
         rules: [
             {
@@ -140,7 +139,10 @@ module.exports = {
     },
 
     plugins: [
-        new ProgressBarPlugin(),
+        new ProgressBarPlugin({
+            // format: 'build [:bar] ' +' (:elapsed seconds)',
+            // clear: true
+        }),
         new webpack.HotModuleReplacementPlugin({
 
         }),
@@ -161,5 +163,5 @@ module.exports = {
         cacheWithContext: true,
         // unsafeCache: /src\/utilities/ // 可以用于匹配文件路径或只缓存某些模块
     },
-    
+
 }

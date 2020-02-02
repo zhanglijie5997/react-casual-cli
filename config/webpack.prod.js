@@ -4,6 +4,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const ProgressBarPlugin = require('progress-bar-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 function pathResolve(url) {
     return path.resolve(__dirname, url);
 }
@@ -28,6 +29,7 @@ module.exports = {
     
     recordsPath: path.join(__dirname, '../dist/records.json'),
     plugins: [
+        new CleanWebpackPlugin(),
         new ProgressBarPlugin(),
         new UglifyJsPlugin({
             test: [/\.js($|\?)/i],

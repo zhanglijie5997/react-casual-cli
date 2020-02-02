@@ -29,6 +29,7 @@
     "babel-loader": "7",
     "babel-preset-es2015": "^7.0.0-beta.3",
     "babel-preset-react": "^7.0.0-beta.3",
+    "clean-webpack-plugin": "^3.0.0",
     "compression-webpack-plugin": "1.1.11",
     "css-loader": "^3.4.2",
     "cssnano": "^4.1.10",

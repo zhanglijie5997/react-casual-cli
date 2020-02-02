@@ -4,7 +4,7 @@ import test from './static/images/test.png'
 const App = () => {
     useEffect(() => {
         console.log(`object`);
-        console.log(222222333);
+        console.log(2299992222333);
     },[])
     return (
         <div className={styles.App}>
