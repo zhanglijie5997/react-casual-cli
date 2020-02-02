@@ -21,7 +21,7 @@ module.exports = {
     output: {
         path: pathResolve("../dist"),
         filename: "./js/[name]__bound__[hash:8].js",
-        publicPath: ""
+        publicPath: "/"
     },
     // 监听
     watch: true,
@@ -61,6 +61,9 @@ module.exports = {
                         query: {
                             presets: ['react', 'es2015', '@babel/preset-env']//支持react jsx和ES6语法编译
                         }
+                    },
+                    {
+                        loader: "cache-loader",
                     }
                 ],
                 exclude: /node_modules/,
@@ -134,11 +137,16 @@ module.exports = {
                         }
                     }
                 ]
+            },
+            {
+                test: /\.json$/,
+                use: ["json-loader"]
             }
         ],
     },
 
     plugins: [
+        new webpack.HotModuleReplacementPlugin(),
         new ProgressBarPlugin({
             // format: 'build [:bar] ' +' (:elapsed seconds)',
             // clear: true

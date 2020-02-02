@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack-dev-server --quiet --config=config/webpack.dev.js",
+    "start": "webpack-dev-server  --config=config/webpack.dev.js",
     "build": "webpack --config=config/webpack.prod.js",
     "git": "git add . && git commit -m",
     "push": "git push"
@@ -29,16 +29,19 @@
     "babel-loader": "7",
     "babel-preset-es2015": "^7.0.0-beta.3",
     "babel-preset-react": "^7.0.0-beta.3",
+    "cache-loader": "^4.1.0",
     "clean-webpack-plugin": "^3.0.0",
-    "compression-webpack-plugin": "1.1.11",
+    "compression-webpack-plugin": "^3.1.0",
     "css-loader": "^3.4.2",
     "cssnano": "^4.1.10",
     "eslint": "^6.8.0",
     "extract-loader": "^4.0.3",
     "file-loader": "^5.0.2",
+    "happypack": "^5.0.1",
     "html-loader": "^0.5.5",
     "html-webpack-plugin": "^3.2.0",
     "image-webpack-loader": "^6.0.0",
+    "json-loader": "^0.5.7",
     "mini-css-extract-plugin": "^0.9.0",
     "node-sass": "^4.13.1",
     "postcss": "^7.0.26",
@@ -58,7 +61,8 @@
     "webpack": "^4.41.5",
     "webpack-cli": "^3.3.10",
     "webpack-dashboard": "^3.2.0",
-    "webpack-dev-server": "^3.10.1"
+    "webpack-dev-server": "^3.10.1",
+    "webpack-hot-middleware": "^2.25.0"
   },
   "dependencies": {
     "@babel/runtime": "^7.8.3"
