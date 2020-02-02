@@ -1,5 +1,5 @@
 {
-  "name": "webpack",
+  "name": "react-easy-cli",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack-dev-server --quiet --config=config/webpack.dev.js",
     "build": "webpack --config=config/webpack.prod.js",
-    "git": "git add . && git commit -m"
+    "git": "git add . && git commit -m",
+    "push": "git push"
   },
   "keywords": [],
   "author": "",

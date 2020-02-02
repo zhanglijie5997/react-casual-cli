@@ -1162,4 +1162,3 @@ module.exports = {
         ]
     }
 }
-}
