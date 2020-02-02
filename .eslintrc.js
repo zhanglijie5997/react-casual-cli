@@ -1,6 +1,13 @@
 module.exports = {
+    "root": true,
+    "parserOptions": {
+        sourcetype: "module"
+    },
+    "env": {
+        browser: true
+    },
     "parser": 'babel-eslint',
-    "plugins": ["react"],
+    "plugins": ["react", "import"],
     "rules": {
         // @off 不强制要求写 propTypes
         'react/boolean-prop-naming': 'off',

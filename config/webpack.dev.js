@@ -36,9 +36,7 @@ module.exports = {
         port: "8080",
         contentBase: "dist",
         hot: true,
-        overlay: {
-            errors:true
-        },
+        overlay: true,
         clientLogLevel: "none",
         compress: true, // 一切服务采用gzip压缩
         quiet: true, // 禁止显示devServer的console信息
@@ -64,10 +62,20 @@ module.exports = {
                     },
                     {
                         loader: "cache-loader",
+                    },
+                    {
+                        loader: "eslint-loader",
+                        
+                        options: {
+                            sourceMaps: true,
+                            formatter: require("eslint-friendly-formatter")
+                        }
                     }
                 ],
                 exclude: /node_modules/,
-                include: pathResolve("../src")
+                include: pathResolve("../src"),
+                enforce: "pre", // 编译前检查
+                
             },
             {
                 test: /\.(sa|sc|c)ss$/,
@@ -146,7 +154,6 @@ module.exports = {
     },
 
     plugins: [
-        new webpack.HotModuleReplacementPlugin(),
         new ProgressBarPlugin({
             // format: 'build [:bar] ' +' (:elapsed seconds)',
             // clear: true
