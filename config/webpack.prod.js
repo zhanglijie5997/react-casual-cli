@@ -16,8 +16,6 @@ const happyThreadPool = HappyPack.ThreadPool({
 function pathResolve(url) {
     return path.resolve(__dirname, url);
 }
-
-
 module.exports = {
     entry: {
         main: [pathResolve("../src")],
@@ -261,11 +259,6 @@ module.exports = {
                 minifyURLs: true,
             }
         }),
-        // new MiniCssExtractPlugin({
-        //     filename: "css/[name]__[chunkhash:8].css",
-        //     chunkFilename: "css/[name]__[id]__[chunkhash:5].css",
-        //     ignoreOrder: false //  启用以删除有关顺序冲突的警告  
-        // }),
         new ExtractTextPlugin("css/styles.css"),//抽离出来以后的css文件名称
         new OptimizeCssAssetsPlugin(),//执行压缩抽离出来的css
         

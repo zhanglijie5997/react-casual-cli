@@ -1,6 +1,5 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 const webpack = require("webpack");
 function pathResolve(url) {
@@ -172,11 +171,6 @@ module.exports = {
         }),
         new webpack.HotModuleReplacementPlugin({
 
-        }),
-        new MiniCssExtractPlugin({
-            filename: "css/[name]__[chunkhash:8].css",
-            chunkFilename: "[id].css",
-            ignoreOrder: false //  启用以删除有关顺序冲突的警告  
         }),
         new HtmlWebpackPlugin({ template: "./public/index.html" }),
     ],
