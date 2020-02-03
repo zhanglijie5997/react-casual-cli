@@ -1,8 +1,11 @@
 .App {
     font-size: 30px;
-    color: blue;
+    color: red;
     .img {
         width: 200px;
         height: 200px;
+    }
+    dd {
+        transform: translateY(20px);
     }
 }

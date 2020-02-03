@@ -53,7 +53,18 @@ module.exports = {
         rules: [
             {
                 test: /\.(js|jsx|mjs)$/,
+                exclude: /node_modules/,
+                include: pathResolve("../src"),
+                enforce: "pre", // 编译前检查
                 use: [
+                    {
+                        loader: "eslint-loader",
+                        
+                        options: {
+                            sourceMaps: true,
+                            formatter: require("eslint-friendly-formatter")
+                        }
+                    },
                     {
                         loader: "babel-loader",
                         query: {
@@ -63,18 +74,8 @@ module.exports = {
                     {
                         loader: "cache-loader",
                     },
-                    {
-                        loader: "eslint-loader",
-                        
-                        options: {
-                            sourceMaps: true,
-                            formatter: require("eslint-friendly-formatter")
-                        }
-                    }
+                    
                 ],
-                exclude: /node_modules/,
-                include: pathResolve("../src"),
-                enforce: "pre", // 编译前检查
                 
             },
             {
@@ -83,22 +84,33 @@ module.exports = {
                     {
                         loader: "style-loader",
                     },
+                    
                     {
                         loader: "css-loader",
                         options: {
-                            modules: true,
+                            modules: {
+                                localIdentName: '[name]__[local]__[hash:base64:5]'
+                            },
                             sourceMap: true,
-                        }
+                        },
+                        
                     },
                     {
                         loader: "sass-loader",
                         options: {
-                            // name: "[local]__[name]__[hash:base64:5]",
                             webpackImporter: false,
                             implementation: require('sass'),
                             sassOptions: {
                                 indentWidth: 4,
                             }
+                        }
+                    },
+                    {
+                        loader: "postcss-loader",
+                        options: {
+                            plugins: [
+                                require("autoprefixer")
+                            ]
                         }
                     },
                 ]

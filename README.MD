@@ -11,3 +11,5 @@
 ### 集成css js 代码分割
 
 ### 集成TreeShake
+
+### 集成gzip压缩
