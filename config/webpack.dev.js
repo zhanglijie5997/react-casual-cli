@@ -19,7 +19,7 @@ module.exports = {
     mode: "development",
     output: {
         path: pathResolve("../dist"),
-        filename: "./js/[name]__bound__[hash:8].js",
+        filename: "js/[name]__bound__[hash:8].js",
         publicPath: "/"
     },
     // 监听
@@ -31,7 +31,7 @@ module.exports = {
     },
     recordsPath: path.join(__dirname, '../dist/records.json'), // json信息
     devServer: {
-        host:'0.0.0.0',
+        host: '0.0.0.0',
         port: "8080",
         contentBase: "dist",
         hot: true,
@@ -58,7 +58,7 @@ module.exports = {
                 use: [
                     {
                         loader: "eslint-loader",
-                        
+
                         options: {
                             sourceMaps: true,
                             formatter: require("eslint-friendly-formatter")
@@ -73,9 +73,9 @@ module.exports = {
                     {
                         loader: "cache-loader",
                     },
-                    
+
                 ],
-                
+
             },
             {
                 test: /\.(sa|sc|c)ss$/,
@@ -83,7 +83,7 @@ module.exports = {
                     {
                         loader: "style-loader",
                     },
-                    
+
                     {
                         loader: "css-loader",
                         options: {
@@ -92,7 +92,7 @@ module.exports = {
                             },
                             sourceMap: true,
                         },
-                        
+
                     },
                     {
                         loader: "sass-loader",
@@ -165,6 +165,9 @@ module.exports = {
     },
 
     plugins: [
+        
+        // 忽略热更新文件
+        // new webpack.WatchIgnorePlugin(""),
         new ProgressBarPlugin({
             // format: 'build [:bar] ' +' (:elapsed seconds)',
             // clear: true

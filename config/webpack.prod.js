@@ -8,11 +8,13 @@ const CompressionWebpackPlugin = require("compression-webpack-plugin");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");//用来抽离单独抽离css文件
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');//压缩css插件
 const ManifestPlugin = require("webpack-manifest-plugin");
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const os = require("os");
 const HappyPack = require("happypack");
 const happyThreadPool = HappyPack.ThreadPool({
     size: os.cpus().length
-})
+});
+const AddAssetHtmlWebpackPlugin = require("add-asset-html-webpack-plugin");
 function pathResolve(url) {
     return path.resolve(__dirname, url);
 }
@@ -22,8 +24,8 @@ module.exports = {
         // 分包, 第三方资源包不打包进主包
         vendor: [
             '@babel/polyfill',
-            'react',
-            'react-dom',
+            // 'react',
+            // 'react-dom',
         ]
     },
     mode: "production",
@@ -34,7 +36,7 @@ module.exports = {
     },
 
     recordsPath: path.join(__dirname, '../dist/records.json'),
-    
+
     module: {
         rules: [
             {
@@ -45,7 +47,7 @@ module.exports = {
                 use: [
                     {
                         loader: "eslint-loader",
-                        
+
                         options: {
                             sourceMaps: true,
                             formatter: require("eslint-friendly-formatter")
@@ -70,14 +72,14 @@ module.exports = {
                         // { loader: require.resolve("style-loader") },
                         {
                             loader: require.resolve("css-loader"),
-                            options: { 
+                            options: {
                                 modules: {
                                     localIdentName: '[name]__[local]__[hash:base64:5]'
                                 },
-                             } 
+                            }
                         },
                         {
-                            loader: require.resolve("sass-loader") ,
+                            loader: require.resolve("sass-loader"),
                             options: {
                                 webpackImporter: false,
                                 implementation: require('sass'),
@@ -87,10 +89,10 @@ module.exports = {
                             }
                         },
                         {
-                            loader: require.resolve( "postcss-loader"),
+                            loader: require.resolve("postcss-loader"),
                         },
                     ]
-                }) 
+                })
             },
             {
                 test: /\.(png|jpe?g|webp|gif|svg)(\?.*)$/i,
@@ -187,11 +189,12 @@ module.exports = {
         ],
     },
     plugins: [
-        
+       
+        new BundleAnalyzerPlugin(),
         new ManifestPlugin({
             filename: "asset-manifest.json"
         }),
-        new CleanWebpackPlugin(),
+        // new CleanWebpackPlugin(),
         new ProgressBarPlugin(),
         new HappyPack({
             id: "js",
@@ -238,17 +241,17 @@ module.exports = {
             }
 
         }),
-        new HtmlWebpackPlugin({ 
+        new HtmlWebpackPlugin({
             hash: true,
             template: "./public/index.html",
-            inject:true, 
+            inject: true,
             minify: {
-                 //是否对大小写敏感，默认false
+                //是否对大小写敏感，默认false
                 caseSensitive: true,
                 removeComments: true, // 移除HTML中的注释
                 collapseWhitespace: true, // 删除空白符与换行符
                 //是否简写boolean格式的属性如：disabled="disabled" 简写为disabled  默认false
-                collapseBooleanAttributes: true, 
+                collapseBooleanAttributes: true,
                 removeRedundantAttributes: true,
                 useShortDoctype: true,  // 使用短的文档类型，默认false
                 removeEmptyAttributes: true,
@@ -261,7 +264,13 @@ module.exports = {
         }),
         new ExtractTextPlugin("css/styles.css"),//抽离出来以后的css文件名称
         new OptimizeCssAssetsPlugin(),//执行压缩抽离出来的css
-        
+        new AddAssetHtmlWebpackPlugin({
+            filepath: path.resolve(__dirname, "../dist/dll/react/*.dll.js")
+        }),
+        new webpack.DllReferencePlugin({
+            context: __dirname,
+            manifest: require("../dist/dll/react/react.manifest.json")
+        }),
     ],
     resolve: {
         // 路径别名

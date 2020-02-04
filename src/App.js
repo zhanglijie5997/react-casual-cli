@@ -1,15 +1,21 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback, useState } from 'react';
 import styles from './App.scss';
 import test from './static/images/test.png'
 const App = () => {
+    const [getNum, setNum] = useState(0); 
     useEffect(() => { 
-        console.log("_");
+        console.log("_444");
+        changeState();
     }, []);
+
+    const changeState = useCallback(() => {
+        setNum(getNum + 1);
+    }, [getNum]);
     return (
         <div className={styles.App}>
             react 项目2244433fff
-            <dd>222</dd>
-            {/* <img src={test} className={styles.img} /> */}
+            <dd onClick={changeState}>{ getNum }</dd>
+            <img src={test} className={styles.img} />
         </div>
     );
 }
