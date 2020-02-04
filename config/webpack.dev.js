@@ -1,6 +1,7 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const ProgressBarPlugin = require('progress-bar-webpack-plugin');
+const HardSourceWebpackPlugin = require("hard-source-webpack-plugin");// 构建加速
 const webpack = require("webpack");
 function pathResolve(url) {
     return path.resolve(__dirname, url);
@@ -165,7 +166,7 @@ module.exports = {
     },
 
     plugins: [
-        
+        new HardSourceWebpackPlugin(),
         // 忽略热更新文件
         // new webpack.WatchIgnorePlugin(""),
         new ProgressBarPlugin({
@@ -187,5 +188,8 @@ module.exports = {
         cacheWithContext: true,
         // unsafeCache: /src\/utilities/ // 可以用于匹配文件路径或只缓存某些模块
     },
-
+    externals: {
+        "react": "React",
+        "react-dom": "ReactDOM"
+    }
 }

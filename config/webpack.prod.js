@@ -189,12 +189,11 @@ module.exports = {
         ],
     },
     plugins: [
-       
+        
         new BundleAnalyzerPlugin(),
         new ManifestPlugin({
             filename: "asset-manifest.json"
         }),
-        // new CleanWebpackPlugin(),
         new ProgressBarPlugin(),
         new HappyPack({
             id: "js",
@@ -262,15 +261,12 @@ module.exports = {
                 minifyURLs: true,
             }
         }),
-        new ExtractTextPlugin("css/styles.css"),//抽离出来以后的css文件名称
-        new OptimizeCssAssetsPlugin(),//执行压缩抽离出来的css
         new AddAssetHtmlWebpackPlugin({
             filepath: path.resolve(__dirname, "../dist/dll/react/*.dll.js")
         }),
-        new webpack.DllReferencePlugin({
-            context: __dirname,
-            manifest: require("../dist/dll/react/react.manifest.json")
-        }),
+        new ExtractTextPlugin("css/styles.css"),//抽离出来以后的css文件名称
+        new OptimizeCssAssetsPlugin(),//执行压缩抽离出来的css
+        
     ],
     resolve: {
         // 路径别名
@@ -295,4 +291,8 @@ module.exports = {
             }
         }
     },
+    externals: {
+        "react": "React",
+        "react-dom": "ReactDOM"
+    }
 }   
