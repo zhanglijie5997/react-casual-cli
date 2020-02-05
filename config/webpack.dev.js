@@ -3,6 +3,9 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 const HardSourceWebpackPlugin = require("hard-source-webpack-plugin");// 构建加速
 const webpack = require("webpack");
+const InterpolateHtmlPlugin = require("react-dev-utils/InterpolateHtmlPlugin");
+const WatchMissingNodeModulesPlugin = require("react-dev-utils/WatchMissingNodeModulesPlugin")
+const openBrowser = require("react-dev-utils/openBrowser")
 function pathResolve(url) {
     return path.resolve(__dirname, url);
 }
@@ -166,6 +169,16 @@ module.exports = {
     },
 
     plugins: [
+        // 确保npm install <library>强制进行项目重建。
+        new WatchMissingNodeModulesPlugin(path.resolve('node_modules')),
+        new InterpolateHtmlPlugin(HtmlWebpackPlugin, {
+            PUBLIC_URL: "../public/"
+        }),
+        new webpack.NamedModulesPlugin(),
+        // 不必要到处import require
+        new webpack.ProvidePlugin({
+            React: "react"
+        }),
         new HardSourceWebpackPlugin(),
         // 忽略热更新文件
         // new webpack.WatchIgnorePlugin(""),
@@ -176,7 +189,28 @@ module.exports = {
         new webpack.HotModuleReplacementPlugin({
 
         }),
-        new HtmlWebpackPlugin({ template: "./public/index.html" }),
+        new HtmlWebpackPlugin({ 
+            hash: true,
+            template: "./public/index.html",
+            inject: true,
+            minify: {
+                //是否对大小写敏感，默认false
+                caseSensitive: true,
+                removeComments: true, // 移除HTML中的注释
+                collapseWhitespace: true, // 删除空白符与换行符
+                //是否简写boolean格式的属性如：disabled="disabled" 简写为disabled  默认false
+                collapseBooleanAttributes: true,
+                removeRedundantAttributes: true,
+                useShortDoctype: true,  // 使用短的文档类型，默认false
+                removeEmptyAttributes: true,
+                removeStyleLinkTypeAttributes: true, // 删除style的类型属性， type="text/css" 同上
+                keepClosingSlash: true,
+                minifyJS: true,// 压缩内联js
+                minifyCSS: true, // 压缩内联css
+                minifyURLs: true,
+            },
+            favicon: path.resolve("./public/favi.ico")
+         }),
     ],
     resolve: {
         alias: {
@@ -192,4 +226,8 @@ module.exports = {
         "react": "React",
         "react-dom": "ReactDOM"
     }
+}
+
+if(openBrowser("http://localhost:8080")) {
+    console.log("open");
 }

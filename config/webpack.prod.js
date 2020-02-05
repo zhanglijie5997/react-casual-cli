@@ -10,6 +10,7 @@ const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');//
 const ManifestPlugin = require("webpack-manifest-plugin");
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const os = require("os");
+const InterpolateHtmlPlugin = require("react-dev-utils/InterpolateHtmlPlugin")
 const HappyPack = require("happypack");
 const happyThreadPool = HappyPack.ThreadPool({
     size: os.cpus().length
@@ -189,7 +190,20 @@ module.exports = {
         ],
     },
     plugins: [
-        
+        new InterpolateHtmlPlugin(HtmlWebpackPlugin, {
+            PUBLIC_URL: "../dist"
+        }),
+        // 根据模块的相对路径生成一个四位数的hash作为模块id, 建议用于生产环境
+        new webpack.HashedModuleIdsPlugin({
+            hashFunction: 'sha256',
+            hashDigest: 'hex',
+            hashDigestLength: 20
+        }),
+        // 不必要到处import require
+        new webpack.ProvidePlugin({
+            React: "react"
+        }),
+        new CleanWebpackPlugin(),
         new BundleAnalyzerPlugin(),
         new ManifestPlugin({
             filename: "asset-manifest.json"
@@ -259,14 +273,15 @@ module.exports = {
                 minifyJS: true,// 压缩内联js
                 minifyCSS: true, // 压缩内联css
                 minifyURLs: true,
-            }
+            },
+            favicon: path.resolve("./public/favi.ico")
         }),
         new AddAssetHtmlWebpackPlugin({
             filepath: path.resolve(__dirname, "../dist/dll/react/*.dll.js")
         }),
         new ExtractTextPlugin("css/styles.css"),//抽离出来以后的css文件名称
         new OptimizeCssAssetsPlugin(),//执行压缩抽离出来的css
-        
+
     ],
     resolve: {
         // 路径别名
