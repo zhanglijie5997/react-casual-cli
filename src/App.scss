@@ -1,11 +1,14 @@
 .App {
     font-size: 30px;
     color: red;
+    width: 100px;
+    white-space: pre-wrap;
     .img {
         width: 200px;
         height: 200px;
     }
     dd {
+        display: inline;
         transform: translateY(0px);
     }
 }

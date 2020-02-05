@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback, useState } from 'react';
+import { useEffect, useCallback, useState } from 'react';
 import styles from './App.scss';
 import test from './static/images/test.png'
 const App = () => {
