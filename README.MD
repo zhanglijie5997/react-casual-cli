@@ -1,4 +1,18 @@
-### react-ease-cli, 不依赖create-react-app的脚手架, 配置精简 ###
+### react-casual-cli, 不依赖create-react-app的脚手架, 配置精简 ###
+
+### 使用步骤 ### 
+
+1.新建文件夹 npm init -y
+
+2.npm install react-casual-cli / yarn add react-casual-cli
+
+3.在node_modules中找到react-casual-cli, 拖到主目录
+
+4.cd react-casual-cli 
+
+5.npm install yarn 
+
+6.yarn start
 
 ### 集成babel
 

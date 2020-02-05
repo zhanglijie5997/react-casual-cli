@@ -1,11 +1,11 @@
 {
-  "name": "react-easy-cli",
-  "version": "1.0.0",
-  "description": "",
+  "name": "react-casual-cli",
+  "version": "1.0.1",
+  "description": "react-casual-cli",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack-dev-server --config=config/webpack.dev.js",
+    "start": "yarn && webpack-dev-server --config=config/webpack.dev.js",
     "dll": "webpack --config=config/webpack.dll.js",
     "build": "webpack --config=config/webpack.prod.js",
     "git": "git add . && git commit -m",
@@ -13,7 +13,7 @@
     "lint": "eslint --fix --ext .jsx,.js src/ --cache"
   },
   "keywords": [],
-  "author": "",
+  "author": "zhanglijie",
   "license": "ISC",
   "devDependencies": {
     "@babel/cli": "^7.8.4",
@@ -29,7 +29,7 @@
     "add-asset-html-webpack-plugin": "^3.1.3",
     "autoprefixer": "^9.7.4",
     "babel-core": "^7.0.0-bridge.0",
-    "babel-loader": "7",
+    "babel-loader": "7.1.5",
     "babel-preset-es2015": "^7.0.0-beta.3",
     "babel-preset-react": "^7.0.0-beta.3",
     "cache-loader": "^4.1.0",
