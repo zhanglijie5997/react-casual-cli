@@ -5,7 +5,9 @@ const HardSourceWebpackPlugin = require("hard-source-webpack-plugin");// 构建�
 const webpack = require("webpack");
 const InterpolateHtmlPlugin = require("react-dev-utils/InterpolateHtmlPlugin");
 const WatchMissingNodeModulesPlugin = require("react-dev-utils/WatchMissingNodeModulesPlugin")
-const openBrowser = require("react-dev-utils/openBrowser")
+const openBrowser = require("react-dev-utils/openBrowser");
+const favicon = require("./webpack.base").favicon
+const DEFAULT_PORT = "3001"
 function pathResolve(url) {
     return path.resolve(__dirname, url);
 }
@@ -36,7 +38,7 @@ module.exports = {
     recordsPath: path.join(__dirname, '../dist/records.json'), // json信息
     devServer: {
         host: '0.0.0.0',
-        port: "8080",
+        port: DEFAULT_PORT,
         contentBase: "dist",
         hot: true,
         overlay: true,
@@ -222,11 +224,13 @@ module.exports = {
                 minifyCSS: true, // 压缩内联css
                 minifyURLs: true,
             },
-            favicon: path.resolve("./public/favi.ico")
+            favicon: favicon
         }),
     ],
     resolve: {
         alias: {
+            "@Utils": pathResolve("../src/Utils"),
+            "@Static": pathResolve("../src/Static"),
             "@Pages": pathResolve("../src/Pages"),
             "@Components": pathResolve("../src/Components")
         },
@@ -241,6 +245,6 @@ module.exports = {
     }
 }
 
-if (openBrowser("http://localhost:8080")) {
+if (openBrowser("http://localhost:"+ DEFAULT_PORT)) {
     console.log(`open browser success 🔥`);
 }

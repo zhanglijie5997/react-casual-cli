@@ -295,6 +295,8 @@ module.exports = {
     resolve: {
         // 路径别名
         alias: {
+            "@Utils": pathResolve("../src/Utils"),
+            "@Static": pathResolve("../src/Static"),
             "@Pages": pathResolve("../src/Pages"),
             "@Components": pathResolve("../src/Components")
         },

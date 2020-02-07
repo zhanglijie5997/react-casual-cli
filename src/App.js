@@ -1,6 +1,6 @@
 import { useEffect, useCallback, useState } from 'react';
 import styles from './App.scss';
-import test from './static/images/test.jpg'
+import test from '@Static/Images/test.jpg'
 const App = () => {
     const [getNum, setNum] = useState(0); 
     useEffect(() => {  
