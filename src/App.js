@@ -1,10 +1,10 @@
 import { useEffect, useCallback, useState } from 'react';
 import styles from './App.scss';
-import test from './static/images/test.png'
+import test from './static/images/test.jpg'
 const App = () => {
     const [getNum, setNum] = useState(0); 
     useEffect(() => {  
-        console.log("_444", 666);
+        console.log("_44vvfffvvv4", 66226);
         changeState();
     }, []);
 

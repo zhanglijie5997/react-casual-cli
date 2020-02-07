@@ -18,20 +18,32 @@
 
 ### GitHub https://github.com/zhanglijie5997/react-casual-cli ###
 
-### 集成babel
+### 插件集成 ###
 
-### 集成图片压缩工具
+1. 集成babel
 
-### 集成sass
+2. 集成图片压缩工具
 
-### 集成eslint
+3. 集成sass
 
-### 集成css js 代码分割
+4. 集成eslint
 
-### 集成TreeShake
+5. 集成css js 代码分割
 
-### 集成gzip压缩
+6. 集成TreeShake
 
-### 使用providePlugin,  自动加载模块，不必在每个文件中导入React ### 
+7. 集成gzip压缩
 
-### 🔥 打包优化等方面构建提升 🔥###
+8. 使用providePlugin,  自动加载模块，不必在每个文件中导入React ### 
+
+🔥 打包优化等方面构建提升 🔥
+
+### version ###
+
+v1.0.x 
+  |_ v1.0.0 第一次发布版本
+  |_ v1.0.1 一些构建性能的产检配置
+  |_ v1.0.2 一些信息的更改
+  |_ v1.0.3 README.md 更改
+  |_ v1.0.4 测试图片优化
+
