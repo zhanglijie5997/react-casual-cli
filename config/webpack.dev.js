@@ -7,7 +7,8 @@ const InterpolateHtmlPlugin = require("react-dev-utils/InterpolateHtmlPlugin");
 const WatchMissingNodeModulesPlugin = require("react-dev-utils/WatchMissingNodeModulesPlugin")
 const openBrowser = require("react-dev-utils/openBrowser");
 const favicon = require("./webpack.base").favicon
-const DEFAULT_PORT = "3001"
+const DEFAULT_PORT = require("./webpack.base").DEFAULT_PORT
+const BASE_PLUGINS = require("./webpack.base").basePlugins
 function pathResolve(url) {
     return path.resolve(__dirname, url);
 }
@@ -170,11 +171,7 @@ module.exports = {
         ],
     },
 
-    plugins: [
-        // 预请求资源加载模块 
-        // content 普通模块的 文件夹的绝对路径
-        // request 普通模块的 request 字符串
-        // new webpack.PrefetchPlugin([content],request),
+    plugins: BASE_PLUGINS("development").concat([
         // 避免按需加载产生更多的chunk，超过数量/大小会被合并
         new webpack.optimize.LimitChunkCountPlugin({
             maxChunks: 15, // 必须大于或等于 1
@@ -189,6 +186,9 @@ module.exports = {
         new InterpolateHtmlPlugin(HtmlWebpackPlugin, {
             PUBLIC_URL: "../public/"
         }),
+        // 按出现顺序对模块和块进行排序。这样可以节省空间，因为经常引用的模块和块会获得较小的ID。
+        new webpack.optimize.OccurrenceOrderPlugin(true),
+        // 对模块进行重复数据删除并添加运行时代码。
         new webpack.NamedModulesPlugin(),
         // 不必要到处import require
         new webpack.ProvidePlugin({
@@ -226,7 +226,7 @@ module.exports = {
             },
             favicon: favicon
         }),
-    ],
+    ]),
     resolve: {
         alias: {
             "@Utils": pathResolve("../src/Utils"),
@@ -246,5 +246,5 @@ module.exports = {
 }
 
 if (openBrowser("http://localhost:"+ DEFAULT_PORT)) {
-    console.log(`open browser success 🔥`);
+    console.log("\033[5m",`open browser success 🔥`);
 }

@@ -2,7 +2,9 @@ import { lazy, Suspense } from 'react';
 import ReactDom from 'react-dom';
 // import App from './App';
 import "@Static/Css/reset.css"
-const App = lazy(() => import(/* webpackChunkName:"App" */'./App'))
+// 预加载 /* webpackPreload: true */
+// 预先拉取 /* webpackPrefetch: true */
+const App = lazy(() => import(/* webpackPreload: true */'./App'))
 ReactDom.render(
     <Suspense fallback="loading..."> 
         <App />

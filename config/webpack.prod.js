@@ -10,6 +10,8 @@ const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');//
 const ManifestPlugin = require("webpack-manifest-plugin");
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const os = require("os");
+const favicon = require("./webpack.base").favicon
+const BASE_PLUGINS = require("./webpack.base").basePlugins
 const InterpolateHtmlPlugin = require("react-dev-utils/InterpolateHtmlPlugin")
 const HappyPack = require("happypack");
 const happyThreadPool = HappyPack.ThreadPool({
@@ -189,7 +191,16 @@ module.exports = {
             }
         ],
     },
-    plugins: [
+    plugins: BASE_PLUGINS("production").concat([
+        // 设置环境变量
+        new webpack.DefinePlugin({
+            VERSION: "1.0.0",
+            "process.env": {
+                NODE_ENV: JSON.stringify(process.env.NODE_ENV),
+                REACT_APP_URL: JSON.stringify('https://www.baidu.com'),
+                BASE_URL: JSON.stringify("zhanglijie")
+            }
+        }),
         // 避免按需加载产生更多的chunk，超过数量/大小会被合并
         new webpack.optimize.LimitChunkCountPlugin({
             maxChunks: 15, // 必须大于或等于 1
@@ -283,7 +294,7 @@ module.exports = {
                 minifyCSS: true, // 压缩内联css
                 minifyURLs: true,
             },
-            favicon: path.resolve("./public/favi.ico")
+            favicon: favicon
         }),
         new AddAssetHtmlWebpackPlugin({
             filepath: path.resolve(__dirname, "../dist/dll/react/*.dll.js")
@@ -291,7 +302,7 @@ module.exports = {
         new ExtractTextPlugin("css/styles.css"),//抽离出来以后的css文件名称
         new OptimizeCssAssetsPlugin(),//执行压缩抽离出来的css
 
-    ],
+    ]),
     resolve: {
         // 路径别名
         alias: {

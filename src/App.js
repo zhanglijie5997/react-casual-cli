@@ -4,7 +4,7 @@ import test from '@Static/Images/test.jpg'
 const App = () => {
     const [getNum, setNum] = useState(0); 
     useEffect(() => {  
-        console.log("_44vvfffvvv4", 66226);
+        console.log("_44vvfff",process.env, process.env.REACT_APP_URL, process.env.BASE_URL);
         changeState();
     }, []);
 
