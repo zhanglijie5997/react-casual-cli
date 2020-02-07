@@ -169,6 +169,19 @@ module.exports = {
     },
 
     plugins: [
+        // 预请求资源加载模块 
+        // content 普通模块的 文件夹的绝对路径
+        // request 普通模块的 request 字符串
+        // new webpack.PrefetchPlugin([content],request),
+        // 避免按需加载产生更多的chunk，超过数量/大小会被合并
+        new webpack.optimize.LimitChunkCountPlugin({
+            maxChunks: 15, // 必须大于或等于 1
+            minChunkSize: 10000
+        }),
+        // 通过合并小于 minChunkSize 大小的 chunk，将 chunk 体积保持在指定大小限制以上。
+        new webpack.optimize.MinChunkSizePlugin({
+            minChunkSize: 10000 // Minimum number of characters
+        }),
         // 确保npm install <library>强制进行项目重建。
         new WatchMissingNodeModulesPlugin(path.resolve('node_modules')),
         new InterpolateHtmlPlugin(HtmlWebpackPlugin, {
@@ -189,7 +202,7 @@ module.exports = {
         new webpack.HotModuleReplacementPlugin({
 
         }),
-        new HtmlWebpackPlugin({ 
+        new HtmlWebpackPlugin({
             hash: true,
             template: "./public/index.html",
             inject: true,
@@ -210,7 +223,7 @@ module.exports = {
                 minifyURLs: true,
             },
             favicon: path.resolve("./public/favi.ico")
-         }),
+        }),
     ],
     resolve: {
         alias: {
@@ -228,6 +241,6 @@ module.exports = {
     }
 }
 
-if(openBrowser("http://localhost:8080")) {
-    console.log("open");
+if (openBrowser("http://localhost:8080")) {
+    console.log(`open browser success 🔥`);
 }

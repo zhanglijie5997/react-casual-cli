@@ -12,7 +12,11 @@
 
 5.npm install yarn 
 
-6.yarn start
+6.yarn
+
+7.yarn start
+
+### GitHub https://github.com/zhanglijie5997/react-casual-cli ###
 
 ### 集成babel
 
@@ -27,5 +31,7 @@
 ### 集成TreeShake
 
 ### 集成gzip压缩
+
+### 使用providePlugin,  自动加载模块，不必在每个文件中导入React ### 
 
 ### 🔥 打包优化等方面构建提升 🔥###

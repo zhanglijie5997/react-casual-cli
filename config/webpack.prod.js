@@ -190,6 +190,15 @@ module.exports = {
         ],
     },
     plugins: [
+        // 避免按需加载产生更多的chunk，超过数量/大小会被合并
+        new webpack.optimize.LimitChunkCountPlugin({
+            maxChunks: 15, // 必须大于或等于 1
+            minChunkSize: 10000
+        }),
+        // 通过合并小于 minChunkSize 大小的 chunk，将 chunk 体积保持在指定大小限制以上。
+        new webpack.optimize.MinChunkSizePlugin({
+            minChunkSize: 10000 // Minimum number of characters
+        }),
         new InterpolateHtmlPlugin(HtmlWebpackPlugin, {
             PUBLIC_URL: "../dist"
         }),
