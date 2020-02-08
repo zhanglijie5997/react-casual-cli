@@ -31,7 +31,8 @@ module.exports = {
         filename: "js/[name]__bound__[hash:5].js",
         path: pathResolve("../dist"),
         publicPath: "./",
-        libraryTarget: "umd"
+        libraryTarget: "umd",
+        library: "[name]"
     },
 
     recordsPath: path.join(__dirname, '../dist/records.json'),

@@ -22,7 +22,8 @@ module.exports = {
         path: pathResolve("../dist"),
         filename: "js/[name]__bound__[hash:8].js",
         publicPath: "/",
-        libraryTarget: "umd"
+        libraryTarget: "umd",
+        library: "[name]"
     },
     // 监听
     watch: true,

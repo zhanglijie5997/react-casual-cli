@@ -4,10 +4,26 @@
     white-space: pre-wrap;
     text-align: center;
     .img {
-        width: 50vw;
+        width: 40vw;
     }
     h1, h2 {
         padding: 30px;
+    }
+    svg {
+
+    }
+    h5 {
+        padding-top: 20px;
+        line-height: 32px;
+        display: flex;
+        vertical-align: center;
+        margin: 0 auto;
+        text-align: center;
+        display: inline-block;
+        a {
+            padding-left: 20px;
+            color: #ff0051b5;
+        }
     }
     dd {
         display: inline;
