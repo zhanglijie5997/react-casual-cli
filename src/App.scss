@@ -1,11 +1,13 @@
 .App {
     font-size: 30px;
-    color: red;
-    width: 100px;
+    color: #ff0051b5;
     white-space: pre-wrap;
+    text-align: center;
     .img {
-        width: 200px;
-        height: 200px;
+        width: 50vw;
+    }
+    h1, h2 {
+        padding: 30px;
     }
     dd {
         display: inline;

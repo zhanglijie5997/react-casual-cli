@@ -13,7 +13,7 @@ const DEFAULT_PORT = "3001"
  */
 const basePlugins = (NODE_ENV) => {
     return [
-        // 设置环境变量
+        // setting env
         new webpack.DefinePlugin({
             VERSION: "1.0.0",
             "process.env": {
@@ -36,9 +36,13 @@ const entryBase = {
     "vendor/react-dom": "react-dom"
 }
 
+// proxy address
+const proxyBase = 'http://49.232.173.220:3001'
+
 module.exports = {
     favicon,
     DEFAULT_PORT,
     basePlugins,
-    entryBase
+    entryBase,
+    proxyBase
 }

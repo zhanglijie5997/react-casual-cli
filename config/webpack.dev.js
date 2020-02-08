@@ -10,6 +10,7 @@ const favicon = require("./webpack.base").favicon
 const DEFAULT_PORT = require("./webpack.base").DEFAULT_PORT
 const BASE_PLUGINS = require("./webpack.base").basePlugins
 const entryBase = require("./webpack.base").entryBase
+const proxyBase = require("./webpack.base").proxyBase
 function pathResolve(url) {
     return path.resolve(__dirname, url);
 }
@@ -45,6 +46,13 @@ module.exports = {
             chunks: false, // 不添加chunk信息
             colors: true,
             modules: false, // 不添加构建模块信息
+        },
+        proxy: {
+            "/api": {
+              target: proxyBase,
+              pathRewrite: {'^/api' : ''},
+              changeOrigin: true
+            }
         }
     },
     devtool: "source-map", // 本地调试工具
@@ -99,6 +107,15 @@ module.exports = {
 
                     },
                     {
+                        loader: "postcss-loader",
+                        options: {
+                            plugins: [
+                                require("autoprefixer"),
+                                require('postcss-flexbugs-fixes'),
+                            ]
+                        }
+                    },
+                    {
                         loader: "sass-loader",
                         options: {
                             webpackImporter: false,
@@ -108,14 +125,7 @@ module.exports = {
                             }
                         }
                     },
-                    {
-                        loader: "postcss-loader",
-                        options: {
-                            plugins: [
-                                require("autoprefixer")
-                            ]
-                        }
-                    },
+                    
                 ]
             },
             {

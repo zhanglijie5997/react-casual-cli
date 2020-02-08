@@ -1,9 +1,8 @@
 module.exports = {
-    // parser: "sugarss",
-    parser: "postcss-scss",
+    parser: 'postcss-strip-inline-comments',
     plugins: {
         "postcss-import": {},
         "postcss-cssnext": {},
-        "cssnano": {}
+        "cssnano": {},
     }
 }

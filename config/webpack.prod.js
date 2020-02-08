@@ -79,6 +79,14 @@ module.exports = {
                             }
                         },
                         {
+                            loader: require.resolve("postcss-loader"),
+                            options: {
+                                plugins: [
+                                    require('postcss-flexbugs-fixes'),
+                                ]
+                            }
+                        },
+                        {
                             loader: require.resolve("sass-loader"),
                             options: {
                                 webpackImporter: false,
@@ -88,9 +96,7 @@ module.exports = {
                                 }
                             }
                         },
-                        {
-                            loader: require.resolve("postcss-loader"),
-                        },
+                        
                     ]
                 })
             },

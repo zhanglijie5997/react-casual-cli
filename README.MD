@@ -64,3 +64,5 @@
    v1.0.7 webpack环境变量一些配置变得可配置化
 
    v1.0.8 webpack一些配置的更改, 构建插件的增加
+
+   v1.0.9 webpack proxy && css行内注释报错问题
