@@ -1,6 +1,6 @@
 {
   "name": "react-casual-cli",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "react-casual-cli",
   "main": "index.js",
   "scripts": {
@@ -11,15 +11,15 @@
     "push": "git push",
     "lint": "eslint --fix --ext .jsx,.js src/ --cache"
   },
-  "bin": {
-
-  },
+  "bin": {},
   "keywords": [],
   "author": "zhanglijie",
   "license": "ISC",
   "devDependencies": {
     "@babel/cli": "^7.8.4",
     "@babel/core": "^7.8.4",
+    "@babel/plugin-proposal-object-rest-spread": "^7.8.3",
+    "@babel/plugin-syntax-jsx": "^7.8.3",
     "@babel/plugin-transform-arrow-functions": "^7.8.3",
     "@babel/plugin-transform-runtime": "^7.8.3",
     "@babel/polyfill": "^7.8.3",
@@ -73,6 +73,7 @@
     "webpack-bundle-analyzer": "^3.6.0",
     "webpack-cli": "^3.3.10",
     "webpack-dashboard": "^3.2.0",
+    "webpack-deep-scope-plugin": "^1.6.2",
     "webpack-dev-server": "^3.10.1",
     "webpack-hot-middleware": "^2.25.0",
     "webpack-manifest-plugin": "^2.2.0"
@@ -92,5 +93,6 @@
     "> 1%",
     "iOS 7",
     "last 3 iOS versions"
-  ]
+  ],
+  "sideEffect": false
 }

@@ -18,24 +18,20 @@ const happyThreadPool = HappyPack.ThreadPool({
     size: os.cpus().length
 });
 const AddAssetHtmlWebpackPlugin = require("add-asset-html-webpack-plugin");
+const entryBase = require("./webpack.base").entryBase
+const WebpackDeepScopeAnalysisplugin = require("webpack-deep-scope-plugin").default
+
 function pathResolve(url) {
     return path.resolve(__dirname, url);
 }
 module.exports = {
-    entry: {
-        main: [pathResolve("../src")],
-        // 分包, 第三方资源包不打包进主包
-        vendor: [
-            '@babel/polyfill',
-            // 'react',
-            // 'react-dom',
-        ]
-    },
+    entry: entryBase,
     mode: "production",
     output: {
         filename: "js/[name]__bound__[hash:5].js",
         path: pathResolve("../dist"),
         publicPath: "./",
+        libraryTarget: "umd"
     },
 
     recordsPath: path.join(__dirname, '../dist/records.json'),
@@ -58,8 +54,9 @@ module.exports = {
                     },
                     {
                         loader: "babel-loader",
-                        query: {
-                            presets: ['react', 'es2015', '@babel/preset-env']//支持react jsx和ES6语法编译
+                        options: {
+                            presets: ['react', 'es2015', '@babel/preset-env'],//支持react jsx和ES6语法编译
+                            plugins:["@babel/plugin-proposal-object-rest-spread"]
                         }
                     },
                     {
@@ -192,6 +189,10 @@ module.exports = {
         ],
     },
     plugins: BASE_PLUGINS("production").concat([
+        // tree shark 注意要把babel设置module: false，避免babel将模块转为CommonJS规范
+        // 在package.json中定义 sideEffect: false，
+        // 避免出现import xxx导致模块内部的一些函数执行后影响全局环境，却被去除掉的情况
+        new WebpackDeepScopeAnalysisplugin(),
         // 设置环境变量
         new webpack.DefinePlugin({
             VERSION: "1.0.0",

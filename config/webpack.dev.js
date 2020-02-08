@@ -9,25 +9,19 @@ const openBrowser = require("react-dev-utils/openBrowser");
 const favicon = require("./webpack.base").favicon
 const DEFAULT_PORT = require("./webpack.base").DEFAULT_PORT
 const BASE_PLUGINS = require("./webpack.base").basePlugins
+const entryBase = require("./webpack.base").entryBase
 function pathResolve(url) {
     return path.resolve(__dirname, url);
 }
 
 module.exports = {
-    entry: {
-        main: pathResolve("../src"),
-        // 分包, 第三方资源包不打包进主包
-        vendor: [
-            '@babel/polyfill',
-            'react',
-            'react-dom',
-        ]
-    },
+    entry: entryBase,
     mode: "development",
     output: {
         path: pathResolve("../dist"),
         filename: "js/[name]__bound__[hash:8].js",
-        publicPath: "/"
+        publicPath: "/",
+        libraryTarget: "umd"
     },
     // 监听
     watch: true,
@@ -73,8 +67,11 @@ module.exports = {
                     },
                     {
                         loader: "babel-loader",
-                        query: {
-                            presets: ['react', 'es2015', '@babel/preset-env']//支持react jsx和ES6语法编译
+                        options: {
+                            cacheDirectory: true, // 缓存 loader 的执行结果
+                            // modules: false,
+                            presets: ['react', 'es2015', '@babel/preset-env'],//支持react jsx和ES6语法编译
+                            plugins:["@babel/plugin-proposal-object-rest-spread"]
                         }
                     },
                     {
@@ -172,6 +169,7 @@ module.exports = {
     },
 
     plugins: BASE_PLUGINS("development").concat([
+        
         // 避免按需加载产生更多的chunk，超过数量/大小会被合并
         new webpack.optimize.LimitChunkCountPlugin({
             maxChunks: 15, // 必须大于或等于 1

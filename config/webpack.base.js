@@ -17,16 +17,28 @@ const basePlugins = (NODE_ENV) => {
         new webpack.DefinePlugin({
             VERSION: "1.0.0",
             "process.env": {
-                NODE_ENV: JSON.stringify(NODE_ENV) ,
+                NODE_ENV: JSON.stringify(NODE_ENV),
                 REACT_APP_URL: JSON.stringify('https://www.baidu.com'),
                 BASE_URL: JSON.stringify("zhanglijie")
             }
         }),
+        
     ]
+}
+
+// entry
+const entryBase = {
+    "main": [path.resolve(__dirname,"../src")],
+    "vendor/babel-polyfill": [
+        '@babel/polyfill',
+    ],
+    "vendor/react": "react",
+    "vendor/react-dom": "react-dom"
 }
 
 module.exports = {
     favicon,
     DEFAULT_PORT,
-    basePlugins
+    basePlugins,
+    entryBase
 }
