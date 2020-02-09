@@ -46,6 +46,11 @@
 
 ### version ###
 
+# v1.1.x
+   v1.1.0 en:  react-casual-cli rc「Release Candidate」 version
+   
+          中文: react-casual-cli 发布候选版版本
+
 # v1.0.x 
    v1.0.0 第一次发布版本  
   

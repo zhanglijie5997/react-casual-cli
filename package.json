@@ -1,6 +1,6 @@
 {
   "name": "react-casual-cli",
-  "version": "1.0.9",
+  "version": "1.1.0",
   "description": "react-casual-cli",
   "main": "index.js",
   "scripts": {
@@ -35,6 +35,7 @@
     "babel-preset-es2015": "^7.0.0-beta.3",
     "babel-preset-react": "^7.0.0-beta.3",
     "cache-loader": "^4.1.0",
+    "case-sensitive-paths-webpack-plugin": "^2.3.0",
     "clean-webpack-plugin": "^3.0.0",
     "compression-webpack-plugin": "^3.1.0",
     "css-loader": "^3.4.2",

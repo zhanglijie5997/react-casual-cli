@@ -1,6 +1,6 @@
 const path = require("path");
 const webpack = require("webpack");
-
+const CaseSensitivePathsPlugin = require("case-sensitive-paths-webpack-plugin");
 // favicon browser favicon
 const favicon = path.resolve(__dirname, "../public/favi.ico")
 
@@ -22,7 +22,7 @@ const basePlugins = (NODE_ENV) => {
                 BASE_URL: JSON.stringify("zhanglijie")
             }
         }),
-        
+        new CaseSensitivePathsPlugin()
     ]
 }
 
