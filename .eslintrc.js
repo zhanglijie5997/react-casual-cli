@@ -1,17 +1,25 @@
+const path =require("path");
 module.exports = {
+    
     "root": true,
     "parserOptions": {
-        "sourcetype": "module"
+        "sourceType": "module",
+        "project": path.resolve(__dirname, "./tsconfig.json"),
+        "tsconfigRootDir": __dirname,
+        "ecmaVersion": 2018,
     },
     "env": {
         "browser": true,
         "node": true,
         "es6": true
     },
-    "parser": "babel-eslint",
+    "parser": ["babel-eslint", "@typescript-eslint/parser"],
     "plugins": [
         "react",
         "import"
+    ],
+    "extends": [
+        "plugin:@typescript-eslint/recommended"
     ],
     "settings": {
         "react": {

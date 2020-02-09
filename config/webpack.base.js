@@ -3,7 +3,8 @@ const webpack = require("webpack");
 const CaseSensitivePathsPlugin = require("case-sensitive-paths-webpack-plugin");
 // favicon browser favicon
 const favicon = path.resolve(__dirname, "../public/favi.ico")
-
+const TsconfigPathsConfig = require("tsconfig-paths-webpack-plugin");
+const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin")
 // port
 const DEFAULT_PORT = "3001"
 
@@ -22,9 +23,23 @@ const basePlugins = (NODE_ENV) => {
                 BASE_URL: JSON.stringify("zhanglijie")
             }
         }),
-        new CaseSensitivePathsPlugin()
+        new CaseSensitivePathsPlugin(),
+       
+        new ForkTsCheckerWebpackPlugin({
+            async: false,
+            silent: true,
+            // watch: path.resolve(__dirname, "../src"),
+            tsconfig: path.resolve(__dirname, "../tsconfig.json")
+        }),
     ]
 }
+
+// base resolve
+const resolveBase = [
+    new TsconfigPathsConfig({
+        configFile: path.resolve(__dirname, "../tsconfig.json")
+    }),
+]
 
 // entry
 const entryBase = {
@@ -44,5 +59,6 @@ module.exports = {
     DEFAULT_PORT,
     basePlugins,
     entryBase,
-    proxyBase
+    proxyBase,
+    resolveBase
 }

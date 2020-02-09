@@ -1,4 +1,4 @@
-import { lazy, Suspense } from 'react';
+import React, { lazy, Suspense } from 'react';
 import ReactDom from 'react-dom';
 // import App from './App';
 import "@Static/Css/reset.css"

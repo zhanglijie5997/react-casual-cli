@@ -1,0 +1,61 @@
+{
+    "compilerOptions": {
+        "baseUrl": "/",
+        "outDir": "dist",
+        "module": "esnext",
+        "target": "es5",
+        "lib": [
+            "esnext",
+            "dom",
+            "es2015"
+        ],
+        "esModuleInterop": true,
+        "sourceMap": true,
+        "allowJs": true,
+        "jsx": "react",
+        "moduleResolution": "node",
+        "rootDir": "..",
+        "forceConsistentCasingInFileNames": true,
+        "noImplicitReturns": true,
+        "noImplicitThis": true,
+        "noImplicitAny": true,
+        "importHelpers": true,
+        "strictNullChecks": true,
+        "suppressImplicitAnyIndexErrors": true,
+        "noUnusedLocals": false,
+        "experimentalDecorators": true,
+        "allowUnusedLabels": true, // 不报告未使用标签错误
+        "diagnostics": false, // 显示诊断信息
+        "allowSyntheticDefaultImports": true,
+        "downlevelIteration": true, // 开启全迭代模式
+        "paths": {
+            "@/*": [
+                "src/*"
+            ],
+            "@Components/*": [
+                "src/Components/*"
+            ],
+            "@Static/*": [
+                "src/Static/*"
+            ],
+            "@Utils/*": [
+                "src/Utils/*"
+            ],
+            "@Page/*": [
+                "src/Page/*"
+            ],
+            "@Redux/*": [
+                "src/Redux/*"
+            ],
+        }
+    },
+    "exclude": [
+        "node_modules",
+        "build",
+        "scripts",
+        "acceptance-tests",
+        "webpack",
+        "jest",
+        "src/setupTests.ts"
+    ],
+}

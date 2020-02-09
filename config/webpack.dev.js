@@ -11,6 +11,7 @@ const DEFAULT_PORT = require("./webpack.base").DEFAULT_PORT
 const BASE_PLUGINS = require("./webpack.base").basePlugins
 const entryBase = require("./webpack.base").entryBase
 const proxyBase = require("./webpack.base").proxyBase
+const resolveBase = require("./webpack.base").resolveBase
 function pathResolve(url) {
     return path.resolve(__dirname, url);
 }
@@ -50,9 +51,9 @@ module.exports = {
         },
         proxy: {
             "/api": {
-              target: proxyBase,
-              pathRewrite: {'^/api' : ''},
-              changeOrigin: true
+                target: proxyBase,
+                pathRewrite: { '^/api': '' },
+                changeOrigin: true
             }
         }
     },
@@ -61,7 +62,7 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.(js|jsx|mjs)$/,
+                test: /\.(js|jsx|mjs|ts|tsx)$/,
                 exclude: /node_modules/,
                 include: pathResolve("../src"),
                 enforce: "pre", // 编译前检查
@@ -80,8 +81,12 @@ module.exports = {
                             cacheDirectory: true, // 缓存 loader 的执行结果
                             // modules: false,
                             presets: ['react', 'es2015', '@babel/preset-env'],//支持react jsx和ES6语法编译
-                            plugins:["@babel/plugin-proposal-object-rest-spread"]
+                            plugins: ["@babel/plugin-proposal-object-rest-spread"]
                         }
+                    },
+
+                    {
+                        loader: "ts-loader",
                     },
                     {
                         loader: "cache-loader",
@@ -126,7 +131,7 @@ module.exports = {
                             }
                         }
                     },
-                    
+
                 ]
             },
             {
@@ -180,7 +185,7 @@ module.exports = {
     },
 
     plugins: BASE_PLUGINS("development").concat([
-        
+
         // 避免按需加载产生更多的chunk，超过数量/大小会被合并
         new webpack.optimize.LimitChunkCountPlugin({
             maxChunks: 15, // 必须大于或等于 1
@@ -237,6 +242,9 @@ module.exports = {
         }),
     ]),
     resolve: {
+        plugins: resolveBase.concat([
+
+        ]),
         alias: {
             "@Utils": pathResolve("../src/Utils"),
             "@Static": pathResolve("../src/Static"),
@@ -254,6 +262,6 @@ module.exports = {
     }
 }
 
-if (openBrowser("http://localhost:"+ DEFAULT_PORT)) {
-    console.log("\033[5m",`open browser success 🔥`);
+if (openBrowser("http://localhost:" + DEFAULT_PORT)) {
+    console.log("\033[5m", `open browser success 🔥`);
 }

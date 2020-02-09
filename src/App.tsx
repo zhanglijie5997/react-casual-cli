@@ -1,8 +1,8 @@
-import { useEffect, useCallback, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import styles from './App.scss';
 import test from '@Static/Images/test.jpg'
 const App = () => {
-    const [getNum, setNum] = useState(0); 
+    const [getNum, setNum] = useState<number>(0); 
     useEffect(() => {  
         fetch("/api/data/getIndexRumorList")
             .then(res => res.json())
@@ -14,6 +14,7 @@ const App = () => {
     }, []);
 
     const changeState = useCallback(() => {
+        console.log(getNum);
         setNum(getNum + 1);
     }, [getNum]);
 

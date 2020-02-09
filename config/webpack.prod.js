@@ -19,6 +19,7 @@ const happyThreadPool = HappyPack.ThreadPool({
 });
 const AddAssetHtmlWebpackPlugin = require("add-asset-html-webpack-plugin");
 const entryBase = require("./webpack.base").entryBase
+const resolveBase = require("./webpack.base").resolveBase
 const WebpackDeepScopeAnalysisplugin = require("webpack-deep-scope-plugin").default
 
 function pathResolve(url) {
@@ -312,6 +313,7 @@ module.exports = {
 
     ]),
     resolve: {
+        plugins: resolveBase.concat([]),
         // 路径别名
         alias: {
             "@Utils": pathResolve("../src/Utils"),
