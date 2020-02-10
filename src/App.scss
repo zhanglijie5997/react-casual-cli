@@ -4,10 +4,13 @@
     white-space: pre-wrap;
     text-align: center;
     .img {
-        width: 40vw;
+        width: 140px;
+        display: block;
+        margin: 0 auto;
     }
     h1, h2 {
         padding: 30px;
+        font-size: 20px;
     }
     svg {
 

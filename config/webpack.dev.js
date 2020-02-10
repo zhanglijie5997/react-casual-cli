@@ -11,6 +11,8 @@ const DEFAULT_PORT = require("./webpack.base").DEFAULT_PORT
 const BASE_PLUGINS = require("./webpack.base").basePlugins
 const entryBase = require("./webpack.base").entryBase
 const proxyBase = require("./webpack.base").proxyBase
+const vwBase = require("./webpack.base").vwBase
+
 function pathResolve(url) {
     return path.resolve(__dirname, url);
 }
@@ -111,9 +113,8 @@ module.exports = {
                         loader: "postcss-loader",
                         options: {
                             plugins: [
-                                require("autoprefixer"),
                                 require('postcss-flexbugs-fixes'),
-                            ]
+                            ].concat(vwBase) 
                         }
                     },
                     {

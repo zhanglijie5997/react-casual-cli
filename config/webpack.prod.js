@@ -20,7 +20,7 @@ const happyThreadPool = HappyPack.ThreadPool({
 const AddAssetHtmlWebpackPlugin = require("add-asset-html-webpack-plugin");
 const entryBase = require("./webpack.base").entryBase
 const WebpackDeepScopeAnalysisplugin = require("webpack-deep-scope-plugin").default
-
+const vwBase = require("./webpack.base").vwBase
 function pathResolve(url) {
     return path.resolve(__dirname, url);
 }
@@ -84,7 +84,7 @@ module.exports = {
                             options: {
                                 plugins: [
                                     require('postcss-flexbugs-fixes'),
-                                ]
+                                ].concat(vwBase) 
                             }
                         },
                         {

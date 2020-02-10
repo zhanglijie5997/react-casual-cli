@@ -51,6 +51,9 @@
    
           中文: react-casual-cli 发布候选版版本
 
+   v1.1.1 en:  px to vw plugin
+          
+          中文: px-to-vw 插件适配
 # v1.0.x 
    v1.0.0 第一次发布版本  
   
