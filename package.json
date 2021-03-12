@@ -68,7 +68,7 @@
     "postcss-write-svg": "^3.0.1",
     "progress-bar-webpack-plugin": "^2.1.0",
     "react": "16.10.2",
-    "react-dev-utils": "^10.1.0",
+    "react-dev-utils": "^11.0.4",
     "react-dom": "16.10.2",
     "sass": "^1.25.0",
     "sass-loader": "^8.0.2",
